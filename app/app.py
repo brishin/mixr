@@ -9,7 +9,12 @@ def index():
 
 @app.route('/channel.html')
 def channel():
-  return app.send_static_file('channel.html')    
+  return app.send_static_file('channel.html')
+
+@app.route('/api/login', methods=['POST']):
+  
+@app.route('/static/<path:file_path>'):
+  return app.send_static_file(file_path)
 
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.
