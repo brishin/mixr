@@ -47,6 +47,18 @@ body {
 	padding: 100px;
 	text-align: center;
 	color: black;
-	margin: 40px auto;
+	margin: 60px auto;
 
+}
+
+.mediaplayer {
+	display: block;
+	position:absolute;
+	top:0;
+	right:0;
+	width:500px; 
+	/*width: auto;*/
+	height: 200px;
+	/*height: auto;*/
+	background-color: black;
 }
