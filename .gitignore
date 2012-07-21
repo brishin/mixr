@@ -27,3 +27,4 @@ pip-log.txt
 .mr.developer.cfg
 
 venv
+.DS_Store
