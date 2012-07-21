@@ -20,9 +20,6 @@ window.fbAsyncInit = function() {
   });
 
   // respond to clicks on the login and logout links
-  document.getElementById('fb-login-button').addEventListener('click', function(){
-    FB.login();
-  });
   document.getElementById('auth-logoutlink').addEventListener('click', function(){
     FB.logout();
   });
