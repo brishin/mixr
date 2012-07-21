@@ -1,5 +1,8 @@
 import os
-from flask import Flask
+from flask import Flask, abort, request, make_response, current_app
+import json
+from datetime import timedelta
+from functools import update_wrapper
 
 app = Flask(__name__)
 
@@ -11,10 +14,16 @@ def index():
 def channel():
   return app.send_static_file('channel.html')
 
-@app.route('/api/login', methods=['POST']):
+@app.route('/api/login', methods=['POST'])
+def login():
+  app.logger.debug(str(request.form))
+  if 'authKey' in request.form and 'userID' in request.form:
+    return 'success'
+  abort(400)
   
-@app.route('/static/<path:file_path>'):
-  return app.send_static_file(file_path)
+@app.route('/static/<path:file_path>')
+def static_fetch(file_path):
+  return app.send_static_file(str(file_path))
 
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.
