@@ -26,7 +26,7 @@ window.fbAsyncInit = function() {
   FB.Event.subscribe('auth.statusChange', function(response) {
     if (response.authResponse) {
       // user has auth'd your app and is logged into Facebook
-      var data = {'authkey': FB.getAccessToken(), 'userID': FB.getUserID()};
+      var data = {'authKey': FB.getAccessToken(), 'userID': FB.getUserID()};
       $.post('https://'+window.location.hostname+'/api/login', data, function(){
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
