@@ -2,21 +2,24 @@
 <html>
   <head>
     <title>Mixr</title>
-
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div id="fb-root"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="/static/fb-init.js"></script>
 
-    <h1>Facebook Client-side Authentication Example</h1>
-      <div id="auth-status">
-        <div id="auth-loggedout">
-          <a href="#" id="auth-loginlink">Login</a>
+    <div class = "circle">
+      <h1>Welcome</h1>
+        <div id="auth-status">
+          <div id="auth-loggedout">
+            <a href="#" id="auth-loginlink">Login</a>
+          </div>
+          <div id="auth-loggedin" style="display:none">
+            Hi, <span id="auth-displayname"></span>  
+          (<a href="#" id="auth-logoutlink">logout</a>)
         </div>
-        <div id="auth-loggedin" style="display:none">
-          Hi, <span id="auth-displayname"></span>  
-        (<a href="#" id="auth-logoutlink">logout</a>)
       </div>
     </div>
 
