@@ -16,8 +16,8 @@ def channel():
 
 @app.route('/api/login', methods=['POST'])
 def login():
-  if 'authKey' in request.args and 'userID' in request.args:
-    app.logger.debug(str(request.args))
+  app.logger.debug(str(request.form))
+  if 'authKey' in request.form and 'userID' in request.form:
     return 'success'
   abort(400)
   
