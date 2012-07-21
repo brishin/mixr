@@ -1,6 +1,8 @@
 import os
-from flask import Flask, abort, request
+from flask import Flask, abort, request, make_response, current_app
 import json
+from datetime import timedelta
+from functools import update_wrapper
 
 app = Flask(__name__)
 
@@ -14,7 +16,8 @@ def channel():
 
 @app.route('/api/login', methods=['POST'])
 def login():
-  if 'authKey' in request.form and 'userID' in request.form:
+  if 'authKey' in request.args and 'userID' in request.args:
+    app.logger.debug(str(request.args))
     return 'success'
   abort(400)
   
