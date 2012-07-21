@@ -29,11 +29,7 @@ window.fbAsyncInit = function() {
     if (response.authResponse) {
       // user has auth'd your app and is logged into Facebook
       var data = {'authkey': FB.getAccessToken(), 'userID': FB.getUserID()};
-<<<<<<< HEAD
       $.post('https://'+window.location.hostname+'/api/login', data, function(){
-=======
-      $.post('https://'+window.location.hostname+'/login', data, function(){
->>>>>>> 71e2c04a354bf01574ba2d04aca470d2cec586bc
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
       });
