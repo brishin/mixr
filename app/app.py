@@ -26,7 +26,7 @@ def login():
     r.lpush('users', userID)
     r.hset(userID, 'authKey', authKey)
     graph = facebook.GraphAPI(authKey)
-    pic = = graph.get_object('me/picture', type='square')
+    pic = graph.get_object('me/picture', type='square')
     r.hset(userID, 'pic', pic.get('url', None))
     return 'success'
   abort(400)
