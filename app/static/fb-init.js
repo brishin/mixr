@@ -1,5 +1,6 @@
 // Load the SDK Asynchronously
 (function(d){
+  'use strict'
    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
    if (d.getElementById(id)) {return;}
    js = d.createElement('script'); js.id = id; js.async = true;
@@ -9,6 +10,7 @@
 
 // Init the SDK upon load
 window.fbAsyncInit = function() {
+  'use strict'
   FB.init({
     appId      : '325013177591412', // App ID
     channelUrl : '//'+window.location.hostname+'/channel.html', // Path to your Channel File
@@ -18,18 +20,17 @@ window.fbAsyncInit = function() {
   });
 
   // respond to clicks on the login and logout links
-  document.getElementById('auth-loginlink').addEventListener('click', function(){
+  document.getElementById('fb-login-button').addEventListener('click', function(){
     FB.login();
   });
   document.getElementById('auth-logoutlink').addEventListener('click', function(){
     FB.logout();
-  }); 
-
+  });
   FB.Event.subscribe('auth.statusChange', function(response) {
     if (response.authResponse) {
       // user has auth'd your app and is logged into Facebook
       var data = {'authkey': FB.getAccessToken(), 'userID': FB.getUserID()};
-      $.post('https://'+window.location.hostname+'/login', data, function(){
+      $.post('https://'+window.location.hostname+'/api/login', data, function(){
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
       });
@@ -39,4 +40,4 @@ window.fbAsyncInit = function() {
       document.getElementById('auth-loggedin').style.display = 'none';
     }
   });
-} 
+};

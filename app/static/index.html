@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Mixr</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -14,7 +14,9 @@
       <h1>Welcome</h1>
         <div id="auth-status">
           <div id="auth-loggedout">
-            <a href="#" id="auth-loginlink">Login</a>
+            <div class="fb-login-button" scope="email,user_checkins">
+              Login with Facebook
+            </div>
           </div>
           <div id="auth-loggedin" style="display:none">
             Hi, <span id="auth-displayname"></span>  
