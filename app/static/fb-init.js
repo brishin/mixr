@@ -1,6 +1,6 @@
 // Load the SDK Asynchronously
 (function(d){
-  'use strict'
+  'use strict';
    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
    if (d.getElementById(id)) {return;}
    js = d.createElement('script'); js.id = id; js.async = true;
@@ -10,7 +10,7 @@
 
 // Init the SDK upon load
 window.fbAsyncInit = function() {
-  'use strict'
+  'use strict';
   FB.init({
     appId      : '325013177591412', // App ID
     channelUrl : '//'+window.location.hostname+'/channel.html', // Path to your Channel File
