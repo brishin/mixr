@@ -50,7 +50,7 @@ def play():
     info = grooveshark.getSong(request.data)
   elif request.headers['Content-Type'] == 'application/json':
     info = grooveshark.getSong(json.dumps(request.json)['title'])
-  elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
+  elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded' or request.headers['Content-Type'] == 'application/x-www-form-urlencoded; charset=UTF-8':
     info = grooveshark.getSong(request.form['title'])
   else:
     print "header" + request.headers['Content-Type']
