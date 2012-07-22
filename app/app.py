@@ -3,8 +3,11 @@ from flask import Flask, abort, request, make_response, current_app
 import json
 from datetime import timedelta
 from functools import update_wrapper
+import redis
+import facebook
 
 app = Flask(__name__)
+r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
 
 @app.route('/')
 def index():
@@ -18,6 +21,14 @@ def channel():
 def login():
   app.logger.debug(str(request.form))
   if 'authKey' in request.form and 'userID' in request.form:
+    userID = request.form['userID']
+    authKey = request.form['authKey']
+    r.lpush('users', userID)
+    r.hset(userID, 'authKey', authKey)
+    graph = facebook.GraphAPI(authKey)
+    pic = graph.get_object('me/picture', type='square')
+    r.hset(userID, 'pic', pic.get('url', None))
+    r.rpush('processUser', userID)
     return 'success'
   abort(400)
   
