@@ -5,6 +5,7 @@ from functools import update_wrapper
 import redis
 import facebook
 import grooveshark
+import random
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
@@ -76,6 +77,16 @@ def login():
     r.rpush('processUser', userID)
     return 'success'
   abort(400)
+
+def get_artists():
+  artists = []
+  users = r.keys('*_artists')
+  for user in users:
+    user_info = r.zrevrangebyscore(user, '+inf', '-inf', num=25, start=0)
+    for i in range(5):
+      artists.append(user_info[i])
+  random.shuffle(artists)
+  return artists
   
 @app.route('/static/<path:file_path>')
 def static_fetch(file_path):
