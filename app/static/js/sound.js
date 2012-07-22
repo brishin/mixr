@@ -31,10 +31,9 @@ var playSong = function(song) {
 
 var getSongs = function(num) {
   "use strict";
-  var a;
   $.post("https://jubble.herokuapp.com/api/random", {
     'rows': num
-  }, function(data) {a = data; return a;}, 'json');
+  }, function(data) {return data;}, 'json');
 };
 
 var updateSliderValue = function(event, ui) {
