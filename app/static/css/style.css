@@ -100,3 +100,16 @@ a{
 	position: absolute;
 	bottom: 0;
 }
+
+
+/* list of songs */
+
+.songList{
+	border: 2px;
+	width: 30%;
+	height: 400px;
+	background-color: #ccc;
+	margin: 0px auto;
+	opacity: 0;
+
+}
