@@ -28,3 +28,7 @@ pip-log.txt
 
 venv
 .DS_Store
+
+my_new_env/
+
+virtualenv.py
