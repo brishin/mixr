@@ -32,6 +32,19 @@ window.fbAsyncInit = function() {
     if (response.authResponse) {
       // user has auth'd your app and is logged into Facebook
       var data = {'authKey': FB.getAccessToken(), 'userID': FB.getUserID()};
+      // put logo movement here
+      var windowHeight = $(window).height();
+
+      $('.bottom').hide();
+      $('.top').animate({
+        padding: '0px',
+        width: '180px'
+      },
+      1000);      
+      $('.logo').animate({
+        margin: '0px'
+      },
+      1000);
       $.post('https://'+window.location.hostname+'/api/login', data, function(){
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
