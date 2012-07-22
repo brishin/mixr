@@ -79,6 +79,34 @@ def login():
     return 'success'
   abort(400)
 
+@app.route('/api/random', methods=['POST'])
+def random():
+  resp = []
+  artists = get_artists()
+  if request.headers['Content-Type'] == 'text/plain':
+    for x in range(0, request.data):
+      resp.append(grooveshark.getRandSong(artists[int(math.floor(random.random()*len(artists)))]))
+  elif request.headers['Content-Type'] == 'application/json':
+    for x in range(0, json.dump(request.json))['rows']:
+      resp.append(grooveshark.getRandSong(artists[int(math.floor(random.random()*len(artists)))]))
+  elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded' or request.headers['Content-Type'] == 'application/x-www-form-urlencoded; charset=UTF-8':
+    for x in range(0, request.form['rows']):
+      resp.append(grooveshark.getRandSong(artists[int(math.floor(random.random()*len(artists)))]))
+  else:
+    print "header" + request.headers['Content-Type']
+    return "415 Unsupported Media Type ;)"
+  js = json.dumps(resp)
+
+  out = Response(js, status=200, mimetype='application/json')
+  out.headers['Link'] = 'http://mixr.herokuapp.com'
+
+  return out
+  
+@app.route('/static/<path:file_path>')
+def static_fetch(file_path):
+  return app.send_static_file(str(file_path))
+
+
 def get_artists():
   artists = []
   users = r.keys('*_artists')
@@ -88,10 +116,6 @@ def get_artists():
       artists.append(user_info[i])
   random.shuffle(artists)
   return artists
-  
-@app.route('/static/<path:file_path>')
-def static_fetch(file_path):
-  return app.send_static_file(str(file_path))
 
 def getSongFromAlbum(artist):
   grooveshark.getRandSong(artist)
