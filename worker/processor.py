@@ -21,6 +21,7 @@ def worker_daemon():
           r.lpush('processUser', person['id'])
           print('adding:' + person['id'])
       get_for_user(user_id)
+      summerize(user_id)
 
 def get_for_user(user_id):
   auth_key = r.hget(user_id, 'authKey')
@@ -35,6 +36,9 @@ def get_for_user(user_id):
       break
     offset += 101
     process_songs(songs, user_id)
+
+def summerize(user_id):
+  pass
 
 def process_songs(songs, user_id):
   print((len(songs['data']), user_id))
@@ -68,8 +72,9 @@ def process_songs(songs, user_id):
     r.hset(str(song_id), 'title', title)
     r.hset(str(song_id), 'album', album)
     r.hset(str(song_id), 'artist', artist)
-    #r.zincrby(str(user_id) + '_artists', artist, 1)
-    r.zincrby('100370656773845_a', artist, 1)
+    r.zincrby(str(user_id) + '_artists', artist, 1)
+    r.inc(str(user_id) + '_power')
+    #r.zincrby('100370656773845_a', artist, 1)
 
 
 if __name__ == '__main__':
