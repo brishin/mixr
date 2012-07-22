@@ -53,6 +53,7 @@ def play():
   elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
     info = grooveshark.getSong(request.form['title'])
   else:
+    print "header" + request.headers['Content-Type']
     return "415 Unsupported Media Type ;)"
   js = json.dumps(info)
 
