@@ -7,7 +7,8 @@
     preferFlash: false,
     debugMode: false,
     onready: function() {
-      playSong({'title': "Upgrade you"}).play();
+      playSong({'title': "Upgrade you"});
+      nowPlaying.play();
     }
   });
 }(document));
@@ -17,7 +18,7 @@ var nowPlaying = "";
 // Add sound based on bubble JSON
 var playSong = function(song) {
   "use strict";
-  $.post("https://mixr.herokuapp.com/api/play", {
+  $.post("https://jubble.herokuapp.com/api/play", {
     'title': song.title
   }, function(data) {
     nowPlaying = soundManager.createSound({
@@ -31,7 +32,7 @@ var playSong = function(song) {
 var getSongs = function(num) {
   "use strict";
   var a;
-  $.post("https://mixr.herokuapp.com/api/random", {
+  $.post("https://jubble.herokuapp.com/api/random", {
     'rows': num
   }, function(data) {a = data;}, 'json');
   return a;

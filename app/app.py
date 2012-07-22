@@ -39,7 +39,7 @@ def song():
   js = json.dumps(data)
 
   resp = Response(js, status=200, mimetype='application/json')
-  resp.headers['Link'] = 'http://mixr.herokuapp.com'
+  resp.headers['Link'] = 'http://jubble.herokuapp.com'
 
   return resp
 
@@ -57,7 +57,7 @@ def play():
   js = json.dumps(info)
 
   resp = Response(js, status=200, mimetype='application/json')
-  resp.headers['Link'] = 'http://mixr.herokuapp.com'
+  resp.headers['Link'] = 'http://jubble.herokuapp.com'
 
   return resp
 
@@ -98,7 +98,7 @@ def randomSong():
   js = json.dumps(resp)
 
   out = Response(js, status=200, mimetype='application/json')
-  out.headers['Link'] = 'http://mixr.herokuapp.com'
+  out.headers['Link'] = 'http://jubble.herokuapp.com'
 
   return out
   
