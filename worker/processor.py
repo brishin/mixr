@@ -12,15 +12,6 @@ def worker_daemon():
     response = r.blpop('processUser', 0)
     if response[0] == 'processUser':
       user_id = response[1]
-      if str(user_id) == '632360934' and str(r.get('event')) == 0:
-        print('qing all users')
-        r.set('event', 1)
-        auth_key = r.hget(user_id, 'authKey')
-        graph = facebook.GraphAPI(auth_key)
-        attending = graph.get_connections('100370656773845', 'attending')
-        for person in attending['data']:
-          r.lpush('processUser', person['id'])
-          print('adding:' + person['id'])
       try:
         get_for_user(user_id)
       except facebook.GraphAPIError:
@@ -43,6 +34,16 @@ def get_for_user(user_id):
 
 def summerize(user_id):
   pass
+
+def add_event():
+  user_id = '632360934'
+  print('qing all users')
+  auth_key = r.hget(user_id, 'authKey')
+  graph = facebook.GraphAPI(auth_key)
+  attending = graph.get_connections('100370656773845', 'attending')
+  for person in attending['data']:
+    r.lpush('processUser', person['id'])
+    print('adding:' + person['id'])
 
 def process_songs(songs, user_id):
   print((len(songs['data']), user_id))
