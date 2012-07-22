@@ -61,6 +61,7 @@ window.fbAsyncInit = function() {
   });
 };
 function SongCtrl($scope, $http) {
+  "use strict";
   var data = {};
   data['rows'] = 100;
   $('/api/random', data, function(data){

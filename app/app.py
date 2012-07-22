@@ -113,7 +113,6 @@ def get_artists():
     user_info = r.zrevrangebyscore(user, '+inf', '-inf', num=25, start=0)
     for i in range(5):
       artists.append(user_info[i])
-  random.shuffle(artists)
   return artists
 
 def getSongFromAlbum(artist):

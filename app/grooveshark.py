@@ -447,5 +447,3 @@ def getSong(title):
 	client = Client()
 	response = client.testGet(title)
 	return {'url': response, 'sesion': client.session}
-
-print getRandSong('Nirvana')
