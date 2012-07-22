@@ -73,7 +73,7 @@ def process_songs(songs, user_id):
     r.hset(str(song_id), 'album', album)
     r.hset(str(song_id), 'artist', artist)
     r.zincrby(str(user_id) + '_artists', artist, 1)
-    r.inc(str(user_id) + '_power')
+    r.incr(str(user_id) + '_power')
     #r.zincrby('100370656773845_a', artist, 1)
 
 
