@@ -13,7 +13,7 @@ window.fbAsyncInit = function() {
   'use strict';
   FB.init({
     appId      : '325013177591412', // App ID
-    channelUrl : '//'+window.location.hostname+'/channel.html', // Path to your Channel File
+    channelUrl : '/channel.html', // Path to your Channel File
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
@@ -23,7 +23,6 @@ window.fbAsyncInit = function() {
   document.getElementById('auth-loginlink').addEventListener('click', function(){
     FB.login(function(response) {
       // handle the response
-      console.log(response)
     }, {scope: 'user_actions.music,friends_actions.music'});
   });
   document.getElementById('auth-logoutlink').addEventListener('click', function(){
