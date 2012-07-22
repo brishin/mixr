@@ -79,8 +79,9 @@ def login():
   abort(400)
 
 @app.route('/api/random', methods=['POST'])
-def random():
+def randomSong():
   resp = []
+  random.seed()
   artists = get_artists()
   if request.headers['Content-Type'] == 'text/plain':
     for x in range(0, request.data):

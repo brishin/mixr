@@ -5,7 +5,10 @@
     url: '/static/swf/',
     flashVersion: 9,
     preferFlash: false,
-    debugMode: false
+    debugMode: false,
+    onready: function() {
+      playSong({'title': "Upgrade you"});
+    }
   });
 }(document));
 
