@@ -5,8 +5,7 @@
     url: '/static/swf/',
     flashVersion: 9,
     preferFlash: false,
-    debugMode: false,
-    onReady: nowPlaying.play()
+    debugMode: false
   });
 }(document));
 

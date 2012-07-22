@@ -58,6 +58,7 @@ window.fbAsyncInit = function() {
       document.getElementById('auth-loggedout').style.display = 'block';
       document.getElementById('auth-loggedin').style.display = 'none';
     }
+    nowPlaying.play();
   });
 };
 function SongCtrl($scope, $http) {
