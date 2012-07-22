@@ -14,9 +14,18 @@ body {
   <body>
     <script type="text/javascript">
 	
-	d3.json("http://localhost:5000/api/song", function(jsondata) {
-		 console.log(jsondata);
+	d3.json("example.json", function(jsondata) {
+		console.log(jsondata);
 		
+		var graph = d3.select("body").selectAll("p")
+			.data(jsondata)
+			.enter().append("p")
+			.text(function(d){console.log(d.album);return d.album;})
+			.selectAll("p")
+			.data(function(d){return d.artist;})
+			.enter().append("p")
+			//.text(function(d){return d})
+
 		/*
 		// the columns you'd like to display
 		var columns = ["hour", "average_revenue", "average_count"];
