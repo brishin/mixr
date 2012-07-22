@@ -23,7 +23,7 @@ window.fbAsyncInit = function() {
   document.getElementById('auth-loginlink').addEventListener('click', function(){
     FB.login(function(response) {
       // handle the response
-    }, {scope: 'user_actions.music,friends_actions.music'});
+    }, {scope: 'user_actions.music,friends_actions.music'}); 
   });
   document.getElementById('auth-logoutlink').addEventListener('click', function(){
     FB.logout();

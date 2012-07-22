@@ -1,35 +1,27 @@
-body {
-	font-family: 'Fredoka One', sans-serif;
+body{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
 }
 
+a{
+	font-family: 'Fredoka One', sans-serif;
+	font-size: 1.2em;
+}
+
+
 .outer{
-	height: 100%;
 	width: 100%;
 }
 
 .logo{
-	width: 300px;
-	margin-left: 10px
-	margin: 0 auto;
-	text-align: center;
+	width: auto;
+	position: relative;
+	margin: 35px auto;
 	z-index: 9999;
-	position: absolute;
-}
-
-
-
-.logo:hover{
-	margin: 310px auto;
-	-webkit-transition: all 0.2s linear .3s; 
-	-moz-transition: all 0.2s linear .3s; 
-	-o-transition: all 0.2s linear .3s;
-	-ms-transition: all 0.2s linear .3s;
-	transition: all 0.2s linear .3s;
-	animation-fill-mode: forward;
+	text-align: center;
 }
 
 .circle {
-	width: 300px;
 	background-color: #82d89b;
 	height: 150px;
 	width: 150px;
@@ -38,26 +30,60 @@ body {
 	padding: 75px;
 	text-align: center;
 	color: black;
-	position: absolute;
+	position: relative;
+	margin: -20px auto;
 
 }
 
 .circle h1{
 	color: white;
+	margin: 0;
+	font-family: 'Fredoka One', sans-serif;
+	font-size: 2em;
+
 }
+
+
+/*Media player*/
 
 .mediaplayer {
 	display: block;
 	position:absolute;
 	top:0;
 	right:0;
-	width: 200px; 
-	height: 30px;
+	width:200px; 
+	height: auto;
 	background-color: #ccc;
-	border: 5px;
+	overflow: hidden;
 }
 
-#slider {
-	margin: 10px;
+.slider {
+	margin: 7px;
 	
+}
+
+.ui-slider-horizontal{
+	height: 0.4em;
+}
+
+.ui-slider .ui-slider-handle{
+	height: 1em;
+	width: 1em;
+	background-image: url('soundicon.png');
+}
+.ui-slider-horizontal .ui-slider-handle{
+	top: -.35em;
+	margin-left: -.3em;
+
+}
+
+.songinfo{
+	padding: 2px 7px 6px 7px;
+	line-height: 1.4em;
+	text-align: right;
+}
+
+.musicnote{
+	position: absolute;
+	bottom: 0;
 }
