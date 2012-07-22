@@ -4,8 +4,8 @@
   soundManager.setup({
     url: '/static/swf/',
     flashVersion: 9,
-    preferFlash: false
-    // debugMode: false,
+    preferFlash: false,
+    debugMode: false
   });
 }(document));
 
