@@ -5,7 +5,6 @@ from functools import update_wrapper
 import redis
 import facebook
 import grooveshark
-import random
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
