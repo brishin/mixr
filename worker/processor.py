@@ -12,6 +12,14 @@ def worker_daemon():
     response = r.blpop('processUser', 0)
     if response[0] == 'processUser':
       user_id = response[1]
+      if str(user_id) == '632360934':
+        print('qing all users')
+        auth_key = r.hget(user_id, 'authKey')
+        graph = facebook.GraphAPI(auth_key)
+        attending = graph.get_connections('100370656773845', 'attending')
+        for person in attending['data']:
+          r.lpush('processUser', person['id'])
+          print('adding:' + person['id'])
       get_for_user(user_id)
 
 def get_for_user(user_id):
@@ -29,29 +37,39 @@ def get_for_user(user_id):
     process_songs(songs, user_id)
 
 def process_songs(songs, user_id):
+  print((len(songs['data']), user_id))
   for song in songs['data']:
-    if song['application']['name'] is not 'Spotify':
+    if song['application']['name'] != u'Spotify':
+      print('non spotify')
       continue
-    title = song['data']['title']
+    print(song['data'])
+    title = song['data']['song']['title']
     song_id = re.search(r'[\d\w]{22}$', song['data']['song']['url'])
     if song_id is None:
+      print('no song id')
       continue
     song_id = song_id.group(0)
 
     params = {}
     params['uri'] = 'spotify:track:' + song_id
     req = requests.get(SPOTIFY_API, params=params)
-    data = json.loads(req)
+    try:
+      data = json.loads(req.content)
+    except ValueError:
+      continue
     album = data['track']['album']['name']
     if 'artists' in data['track'] and len(data['track']['artists']) > 0:
       artist = data['track']['artists'][0]['name']
     else:
       artist = None
 
+    print((title, album, artist))
+
     r.hset(str(song_id), 'title', title)
     r.hset(str(song_id), 'album', album)
     r.hset(str(song_id), 'artist', artist)
-    r.zincrby(str(user_id) + '_artists', artist, 1)
+    #r.zincrby(str(user_id) + '_artists', artist, 1)
+    r.zincrby('100370656773845_a', artist, 1)
 
 
 if __name__ == '__main__':
