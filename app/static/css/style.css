@@ -68,6 +68,7 @@ a{
 	height: auto;
 	background-color: #ccc;
 	overflow: hidden;
+	opacity: 0;
 }
 
 .slider {
