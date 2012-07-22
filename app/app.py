@@ -28,6 +28,10 @@ def login():
     graph = facebook.GraphAPI(authKey)
     pic = graph.get_object('me/picture', type='square')
     r.hset(userID, 'pic', pic.get('url', None))
+    job = {}
+    job['type'] = 'processUser'
+    job['data'] = userID
+    r.rpush('queue', json.dumps(job))
     return 'success'
   abort(400)
   
