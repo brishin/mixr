@@ -7,7 +7,7 @@
     preferFlash: false,
     debugMode: false,
     onready: function() {
-      playSong({'title': "Upgrade you"});
+      playSong({'title': "Upgrade you"}).play();
     }
   });
 }(document));
@@ -26,6 +26,15 @@ var playSong = function(song) {
       onload: function() { this.play(); }
     });
   }, 'json');
+};
+
+var getSongs = function(num) {
+  "use strict";
+  var a;
+  $.post("https://mixr.herokuapp.com/api/random", {
+    'rows': num
+  }, function(data) {a = data;}, 'json');
+  return a;
 };
 
 var updateSliderValue = function(event, ui) {
