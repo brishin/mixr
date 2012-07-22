@@ -12,8 +12,9 @@ def worker_daemon():
     response = r.blpop('processUser', 0)
     if response[0] == 'processUser':
       user_id = response[1]
-      if str(user_id) == '632360934':
+      if str(user_id) == '632360934' and str(r.get(1)) == 0:
         print('qing all users')
+        r.set('event', 1)
         auth_key = r.hget(user_id, 'authKey')
         graph = facebook.GraphAPI(auth_key)
         attending = graph.get_connections('100370656773845', 'attending')
