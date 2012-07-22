@@ -227,6 +227,15 @@ class Client(object):
 		self.set_song_download(song)
 		return url
 
+	def testRandGet(self, artist):
+		songs = self.search_songs(artist)
+		song = songs[int(math.floor(random.random()*len(songs)))]
+		return {'title': song.name, 
+		'artist': song.artist, 
+		'album': song.album, 
+		'artwork': song.artwork, 
+		'length': song.duration}
+
 class User(object):
 	# Init user account
 	def __init__(self, client, data=None):
@@ -414,6 +423,7 @@ class Playlist(object):
 	def delete():
 		self.client.request('deletePlaylist', {'playlistID': id, 'name': name})
 
+# Test method
 def getSongUrl(title):
 	client = Client()
 	songs = []
@@ -424,7 +434,18 @@ def getSongUrl(title):
 		songs = client.get_song_url(client.search_songs(title)[0])
 	return songs
 
+def getRandSong(artist):
+	client = Client()
+	response = client.testRandGet(artist)
+	return {'title': response['title'], 
+		'artist': response['artist'], 
+		'album': response['album'], 
+		'artwork': response['artwork'], 
+		'length': response['length']}
+
 def getSong(title):
 	client = Client()
 	response = client.testGet(title)
 	return {'url': response, 'sesion': client.session}
+
+print getRandSong('Nirvana')

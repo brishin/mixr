@@ -92,6 +92,9 @@ def get_artists():
 def static_fetch(file_path):
   return app.send_static_file(str(file_path))
 
+def getSongFromAlbum(artist):
+  grooveshark.getRandSong(artist)
+
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.
   port = int(os.environ.get('PORT', 5000))

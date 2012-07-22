@@ -14,7 +14,7 @@ var nowPlaying = "";
 // Add sound based on bubble JSON
 var playSong = function(song) {
   "use strict";
-  $.post("http://localhost:5000/api/play", {
+  $.post("https://mixr.herokuapp.com/api/play", {
     'title': song.title
   }, function(data) {
     nowPlaying = soundManager.createSound({
