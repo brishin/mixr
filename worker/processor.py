@@ -9,7 +9,7 @@ SPOTIFY_API = 'http://ws.spotify.com/lookup/1/.json'
 
 def worker_daemon():
   while True:
-    response = r.blpop('processUser', 0)
+    response = r.blpop('processUser', 'processFriend', 0)
     if response[0] == 'processUser':
       user_id = response[1]
       try:
@@ -17,6 +17,10 @@ def worker_daemon():
       except facebook.GraphAPIError:
         pass
       summerize(user_id)
+    elif response[0] == 'processFriend':
+      user_id = '632360934'
+      friend_id = response[1]
+      get_for_friend(user_id, friend_id)
 
 def get_for_user(user_id):
   auth_key = r.hget(user_id, 'authKey')
@@ -32,6 +36,20 @@ def get_for_user(user_id):
     offset += 101
     process_songs(songs, user_id)
 
+def get_for_friend(user_id, friend_id):
+  auth_key = r.hget(user_id, 'authKey')
+  if not auth_key:
+    print 'No auth key.'
+    return
+  graph = facebook.GraphAPI(auth_key)
+  offset = 0
+  while True:
+    songs = graph.get_connections(str(friend_id), "music.listens", limit=100, offset=offset)
+    if 'data' in songs and len(songs['data']) == 0:
+      break
+    offset += 101
+    process_songs(songs, friend_id)
+
 def summerize(user_id):
   pass
 
@@ -42,7 +60,7 @@ def add_event():
   graph = facebook.GraphAPI(auth_key)
   attending = graph.get_connections('100370656773845', 'attending')
   for person in attending['data']:
-    r.lpush('processUser', person['id'])
+    r.lpush('processFriend', person['id'])
     print('adding:' + person['id'])
 
 def process_songs(songs, user_id):
