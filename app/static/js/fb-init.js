@@ -67,6 +67,6 @@ function SongCtrl($scope) {
   "use strict";
   var data = {};
   $.post("https://jubble.herokuapp.com/api/random", {
-    'rows': num
+    'rows': 10
   }, function(data) {$scope.songs = data;}, 'json');
 };
