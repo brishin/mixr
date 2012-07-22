@@ -48,7 +48,7 @@
             .attr("cy", 50)
             .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
             .on("mouseout", function(){d3.select(this).style("fill", "white");})
-            .on("mousedown", upVote);
+            .on("mousedown", upVote());
 
         function increaseRadius(){
             d3.select(this)

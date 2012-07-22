@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-   <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> <link type="text/css" rel="stylesheet" href="style.css"/>
+   <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> 
+   <link type="text/css" rel="stylesheet" href="style.css"/>
     <style type="text/css">
 
 circle {
@@ -43,7 +44,7 @@ svg.selectAll("circle")
     .data(nodes)
     .enter()
     .append("svg:circle")
-      .attr("r", function(d) { return d.radius - 2; })
+      .attr("r", function(d) { console.log('hi'); return d.radius - 2; })
     //.style("fill", function(d, i) { return color(i); });
       .style("fill", function(d,i){
           if(i > 50){
@@ -79,7 +80,7 @@ function upVote(){
       .transition()
         .delay(0)
         .duration(1000)
-        .attr("cy", function(){return parseInt(d3.select(this).attr("cy"))*1.5;} )
+        .attr("cy", function(){console.log("cy");return parseInt(d3.select(this).attr("cy"))*0.75;} )
        .attr("r", function(){return parseInt(d3.select(this).attr("r"))*1.5;});
         
 };         
