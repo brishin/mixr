@@ -8,11 +8,44 @@ body{
 }
 
 .logo{
-	width: auto;
+	width: 601px;
 	position: relative;
-	margin: 20px auto;
+	margin: 0 auto;
 	z-index: 9997;
 	text-align: center;
+}
+
+.logo img {
+	position:absolute;
+	left:0;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+	text-align: center;
+}
+
+.logo img.top{
+	padding-top: 10px;
+	padding-left: 100px;
+
+}
+
+.logo img.bottom{
+	opacity: 0;
+}
+
+.logo img.bottom:hover {
+	opacity:100;
+}
+
+.login{
+	text-align: center;
+	color: black;
+	position: absolute;
+	height: 40px;
+	width: 99%;
+	margin: 410px auto;
 }
 
 .circle{
@@ -24,8 +57,8 @@ body{
 	padding: 60px;
 	text-align: center;
 	color: black;
-	position: relative;
-	margin: -20px auto;
+	position: absolute;
+	margin: 0 auto;
 }
 
 .circle h1{
@@ -36,6 +69,8 @@ body{
 	padding-top: 16px;
 	margin-left: -16px;
 }
+
+
 
 /*.fblogin{
 	margin-top: -30px;
