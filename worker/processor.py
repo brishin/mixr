@@ -9,7 +9,7 @@ SPOTIFY_API = 'http://ws.spotify.com/lookup/1/.json'
 
 def worker_daemon():
   while True:
-    response = r.blpop('processUser', 'processFriend', 0)
+    response = r.blpop(('processUser', 'processFriend'), 0)
     if response[0] == 'processUser':
       user_id = response[1]
       try:
