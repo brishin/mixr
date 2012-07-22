@@ -5,22 +5,15 @@
 	<title>Mixr</title>
 	<link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-	<link href="style.css" rel="stylesheet" type="text/css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script>
-		$(document).ready(function() {
-		$(".slider").slider();
-		});
-	</script>
+	<link href="/static/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	<div id="fb-root"></div>
 
 	<div class = "mediaplayer">
-		<div class="slider"></div>
-		<div class="musicnote"><img src="musicnote.png"></div>
+		<div id="volume" class="slider"><div></div></div>
+		<div class="musicnote"><img src="/static/img/musicnote.png"></div>
 		<div class = "songinfo">
 			Title: Get Outta My Way<br>
 			Artist: Kylie Minogue<br>
@@ -28,6 +21,15 @@
 		</div>
 	</div>
 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/js/soundmanager2-nodebug.js"></script>
+	<script type="text/javascript" src="/static/js/sound.js"></script>
+	<script>
+		$(document).ready(function() {
+			playSong({'title': 'call me maybe'});
+		});
+	</script>
 </body>
 
 </html>

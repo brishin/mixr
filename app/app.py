@@ -4,6 +4,7 @@ from datetime import timedelta
 from functools import update_wrapper
 import redis
 import facebook
+import grooveshark
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
@@ -28,14 +29,31 @@ def song():
   }
   random.seed()
   data = {
-        'title': test['title'][int(math.floor(random.random()*10))],
-        'artist': test['artist'][int(math.floor(random.random()*10))],
-        'artwork': test['artwork'][int(math.floor(random.random()*10))],
-        'album': test['album'][int(math.floor(random.random()*10))],
-        'length': test['length'][int(math.floor(random.random()*10))],
-        'location': test['location'][int(math.floor(random.random()*10))]
+      'title': test['title'][int(math.floor(random.random()*10))],
+      'artist': test['artist'][int(math.floor(random.random()*10))],
+      'artwork': test['artwork'][int(math.floor(random.random()*10))],
+      'album': test['album'][int(math.floor(random.random()*10))],
+      'length': test['length'][int(math.floor(random.random()*10))],
+      'location': test['location'][int(math.floor(random.random()*10))]
     }
   js = json.dumps(data)
+
+  resp = Response(js, status=200, mimetype='application/json')
+  resp.headers['Link'] = 'http://mixr.herokuapp.com'
+
+  return resp
+
+@app.route('/api/play', methods=['POST'])
+def play():
+  if request.headers['Content-Type'] == 'text/plain':
+    info = grooveshark.getSong(request.data)
+  elif request.headers['Content-Type'] == 'application/json':
+    info = grooveshark.getSong(json.dumps(request.json)['title'])
+  elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
+    info = grooveshark.getSong(request.form['title'])
+  else:
+    return "415 Unsupported Media Type ;)"
+  js = json.dumps(info)
 
   resp = Response(js, status=200, mimetype='application/json')
   resp.headers['Link'] = 'http://mixr.herokuapp.com'

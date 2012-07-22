@@ -210,21 +210,22 @@ class Client(object):
 	def get_song_url(self, song):
 		return self.get_song_url_by_id(song.id)
 
+	# Set song to downloaded on grooveshark servers
+	def set_song_download_by_id(self, id):
+		stream = self.get_stream_auth_by_songid(id)
+		return self.request('markSongDownloadedEx', {'streamKey': stream['streamKey'], 'streamServerID': stream['streamServerID'], 'songID': id})
+
+	def set_song_download(self, song):
+		return self.set_song_download_by_id(song.id)
+
 	def testGet(self, title):
-		client = Client()
-		song = client.search_songs(title)[0]
-		resp = client.get_stream_auth_by_songid(song.id)
+		song = self.search_songs(title)[0]
+		resp = self.get_stream_auth_by_songid(song.id)
 		url = 'http://' + resp['ip'] + '/stream.php?streamKey=' + resp['streamKey']
-		print url
 		useragent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
 		cookies =  dict(cookies_are = "PHPSESSID=" + str(self.session))
-		data = requests.get(url, 
-				data=json.dumps(resp['streamKey']), 
-				headers={
-					'accept': '*/*',
-					'user-agent': useragent
-				}, cookies=cookies)
-		return data
+		self.set_song_download(song)
+		return url
 
 class User(object):
 	# Init user account
@@ -423,17 +424,7 @@ def getSongUrl(title):
 		songs = client.get_song_url(client.search_songs(title)[0])
 	return songs
 
-def downloadSong(title):
+def getSong(title):
 	client = Client()
 	response = client.testGet(title)
-	#song = client.search_songs(title)[0]
-	#resp = client.get_stream_auth_by_songid(song.id)
-	#mp3URL = 'http://' + resp['ip'] + '/stream.php?' + resp['streamKey']
-	#data = {}
-	#data['streamKey'] = resp['streamKey']
-	#useragent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
-	#headers = (('user-agent', useragent),)
-	#response = urlgrabber.urlgrab(mp3URL, filename=song.id, data=urllib.urlencode(data), http_headers=headers)
-	return response
-
-print downloadSong("Call me maybe")
+	return {'url': response, 'sesion': client.session}
