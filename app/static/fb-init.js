@@ -20,6 +20,12 @@ window.fbAsyncInit = function() {
   });
 
   // respond to clicks on the login and logout links
+  document.getElementById('auth-loginlink').addEventListener('click', function(){
+    FB.login(function(response) {
+      // handle the response
+      console.log(response)
+    }, {scope: 'user_actions.music,friends_actions.music'});
+  });
   document.getElementById('auth-logoutlink').addEventListener('click', function(){
     FB.logout();
   });
@@ -31,9 +37,6 @@ window.fbAsyncInit = function() {
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
       });
-      FB.login(function(response) {
-        // handle the response
-      }, {scope: 'user_actions.music,friends_actions.music'});
     } else {
       // user has not auth'd your app, or is not logged into Facebook
       document.getElementById('auth-loggedout').style.display = 'block';
