@@ -49,8 +49,6 @@ window.fbAsyncInit = function() {
       $('.songList').delay(1000).animate({
         opacity: '100'
       }, 1000);    
-      
-   
       $.post('https://'+window.location.hostname+'/api/login', data, function(){
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
@@ -60,5 +58,13 @@ window.fbAsyncInit = function() {
       document.getElementById('auth-loggedout').style.display = 'block';
       document.getElementById('auth-loggedin').style.display = 'none';
     }
+  });
+};
+
+function SongCtrl($scope, $http) {
+  data = {}
+  data['rows'] = 100;
+  $('/api/random', data, function(data){
+    $scope.songs = data;
   });
 };
