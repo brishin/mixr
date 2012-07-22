@@ -66,8 +66,7 @@ window.fbAsyncInit = function() {
 function SongCtrl($scope) {
   "use strict";
   var data = {};
-  data['rows'] = 100;
-  $('/api/random', data, function(data){
-    $scope.songs = getSongs(20);
-  });
+  $.post("https://jubble.herokuapp.com/api/random", {
+    'rows': num
+  }, function(data) {$scope.songs = data;}, 'json');
 };
