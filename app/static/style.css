@@ -3,14 +3,6 @@ body{
 	font-size: 14px;
 }
 
-.circle a{
-	font-family: 'Fredoka One', sans-serif;
-	font-size: 1.4em;
-	font-color: black;
-	text-decoration: none;
-}
-
-
 .outer{
 	width: 100%;
 }
@@ -18,8 +10,8 @@ body{
 .logo{
 	width: auto;
 	position: relative;
-	margin: 35px auto;
-	z-index: 9999;
+	margin: 20px auto;
+	z-index: 9997;
 	text-align: center;
 }
 
@@ -43,6 +35,25 @@ body{
 	font-size: 2.4em;
 	padding-top: 16px;
 	margin-left: -16px;
+}
+
+/*.fblogin{
+	margin-top: -30px;
+	height: auto;
+	width: auto;
+	text-align: center;
+	color: black;
+	position: relative;
+	margin: -120px auto;z
+	z-index: 9998;
+
+}
+*/
+a{
+	font-family: 'Fredoka One', sans-serif;
+	font-size: 2em;
+	font-color: white !important;
+	text-decoration: none;
 }
 
 
@@ -69,13 +80,13 @@ body{
 }
 
 .ui-slider .ui-slider-handle{
-	height: 1em;
-	width: 1em;
+	height: .5em;
+	width: .5em;
 	background-image: url('soundicon.png');
 }
 .ui-slider-horizontal .ui-slider-handle{
-	top: -.35em;
-	margin-left: -.3em;
+	top: -.17em;
+	margin-left: -.27em;
 
 }
 
