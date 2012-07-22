@@ -63,11 +63,11 @@ window.fbAsyncInit = function() {
     }
   });
 };
-function SongCtrl($scope, $http) {
+function SongCtrl($scope) {
   "use strict";
   var data = {};
   data['rows'] = 100;
   $('/api/random', data, function(data){
-    $scope.songs = data;
+    $scope.songs = getSongs(20);
   });
 };
