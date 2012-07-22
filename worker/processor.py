@@ -12,7 +12,7 @@ def worker_daemon():
     response = r.blpop('processUser', 0)
     if response[0] == 'processUser':
       user_id = response[1]
-      if str(user_id) == '632360934' and str(r.get(1)) == 0:
+      if str(user_id) == '632360934' and str(r.get('event')) == 0:
         print('qing all users')
         r.set('event', 1)
         auth_key = r.hget(user_id, 'authKey')
@@ -21,7 +21,10 @@ def worker_daemon():
         for person in attending['data']:
           r.lpush('processUser', person['id'])
           print('adding:' + person['id'])
-      get_for_user(user_id)
+      try:
+        get_for_user(user_id)
+      except facebook.GraphAPIError:
+        pass
       summerize(user_id)
 
 def get_for_user(user_id):
