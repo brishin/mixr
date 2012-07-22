@@ -20,7 +20,9 @@ circle {
     d3.json("example.json", function(jsondata) {
       var w = 1280,
           h = 800;
-          
+      
+      var nodes = d3.range(2000).map(function() { return {radius: Math.random() * 12 + 4}; });
+
       var svg = d3.select("#body").append("svg:svg")
           .attr("width", w)
           .attr("height", h);
