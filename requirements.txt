@@ -4,4 +4,5 @@ Werkzeug==0.8.3
 distribute==0.6.24
 facebook-sdk==0.3.1
 redis==2.6.0
+requests==0.13.3
 wsgiref==0.1.2
