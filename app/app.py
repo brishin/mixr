@@ -89,7 +89,7 @@ def random():
     for x in range(0, json.dump(request.json))['rows']:
       resp.append(grooveshark.getRandSong(artists[int(math.floor(random.random()*len(artists)))]))
   elif request.headers['Content-Type'] == 'application/x-www-form-urlencoded' or request.headers['Content-Type'] == 'application/x-www-form-urlencoded; charset=UTF-8':
-    for x in range(0, request.form['rows']):
+    for x in range(0, int(request.form['rows'])):
       resp.append(grooveshark.getRandSong(artists[int(math.floor(random.random()*len(artists)))]))
   else:
     print "header" + request.headers['Content-Type']
