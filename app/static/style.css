@@ -2,34 +2,48 @@ body {
 	font-family: 'Fredoka One', sans-serif;
 }
 
- 
-/*    -webkit-box-shadow: 0px 1px 1px 0px rgba(255,255,255, .2), inset 0px 1px 1px 0px rgb(0,0,0);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(255,255,255, .2), inset 0px 1px 1px 0px rgb(0,0,0);
-    box-shadow: 0px 1px 1px 0px rgba(255,255,255, .2), inset 0px 1px 1px 0px rgb(0,0,0);
-*/
-/*    -webkit-transform: scale(1.0) translateX(-159px) translateY(-68px);
-		-webkit-transform-origin: 50% 20%;
-		-moz-transform: scale(1.0) translateX(-159px) translateY(-68px);
-		-moz-transform-origin: 50% 20%;
-		-o-transform: scale(1.0) translateX(-159px) translateY(-68px);
-		-o-transform-origin: 50% 20%;
-		-ms-transform: scale(1.0) translateX(-159px) translateY(-68px);
-		-ms-transform-origin: 50% 20%;
-		transform: scale(1.0) translateX(-159px) translateY(-68px);
-		transform-origin: 50% 20%;
-*/	
+.outer{
+	height: 100%;
+	width: 100%;
+}
+
+.logo{
+	width: 300px;
+	margin-left: 10px
+	margin: 0 auto;
+	text-align: center;
+	z-index: 9999;
+	position: absolute;
+}
+
+
+
+.logo:hover{
+	margin: 310px auto;
+	-webkit-transition: all 0.2s linear .3s; 
+	-moz-transition: all 0.2s linear .3s; 
+	-o-transition: all 0.2s linear .3s;
+	-ms-transition: all 0.2s linear .3s;
+	transition: all 0.2s linear .3s;
+	animation-fill-mode: forward;
+}
 
 .circle {
-	background-color: #94CDFF;
-	height: 180px;
-	width: 180px;
-	-moz-border-radius: 180px;
-	-webkit-border-radius: 180px;
-	padding: 90px;
+	width: 300px;
+	background-color: #82d89b;
+	height: 150px;
+	width: 150px;
+	-moz-border-radius: 150px;
+	-webkit-border-radius: 150px;
+	padding: 75px;
 	text-align: center;
 	color: black;
-	margin: 60px auto;
+	position: absolute;
 
+}
+
+.circle h1{
+	color: white;
 }
 
 .mediaplayer {

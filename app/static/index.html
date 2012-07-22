@@ -10,15 +10,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="/static/fb-init.js"></script>
 
-    <div class = "circle">
-      <h1>Welcome</h1>
-        <div id="auth-status">
-          <div id="auth-loggedout">
-            <a href="#" id="auth-loginlink">Login</a>
+    <div class = "outer">
+      <div class = "logo">
+        <img src="/static/logo.png">
+      </div>
+      <div class = "circle">
+        <h1>Welcome</h1>
+          <div id="auth-status">
+            <div id="auth-loggedout">
+              <a href="#" id="auth-loginlink">Login</a>
+            </div>
+            <div id="auth-loggedin" style="display:none">
+              Hi, <span id="auth-displayname"></span>  
+            (<a href="#" id="auth-logoutlink">logout</a>)
           </div>
-          <div id="auth-loggedin" style="display:none">
-            Hi, <span id="auth-displayname"></span>  
-          (<a href="#" id="auth-logoutlink">logout</a>)
         </div>
       </div>
     </div>
