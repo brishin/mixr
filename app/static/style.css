@@ -3,9 +3,11 @@ body{
 	font-size: 14px;
 }
 
-a{
+.circle a{
 	font-family: 'Fredoka One', sans-serif;
-	font-size: 1.2em;
+	font-size: 1.4em;
+	font-color: black;
+	text-decoration: none;
 }
 
 
@@ -21,26 +23,26 @@ a{
 	text-align: center;
 }
 
-.circle {
+.circle{
 	background-color: #82d89b;
-	height: 150px;
-	width: 150px;
-	-moz-border-radius: 150px;
-	-webkit-border-radius: 150px;
-	padding: 75px;
+	height: 120px;
+	width: 120px;
+	-moz-border-radius: 120px;
+	-webkit-border-radius: 120px;
+	padding: 60px;
 	text-align: center;
 	color: black;
 	position: relative;
 	margin: -20px auto;
-
 }
 
 .circle h1{
 	color: white;
 	margin: 0;
 	font-family: 'Fredoka One', sans-serif;
-	font-size: 2em;
-
+	font-size: 2.4em;
+	padding-top: 16px;
+	margin-left: -16px;
 }
 
 
