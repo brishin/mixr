@@ -25,7 +25,7 @@
 
 
 
-        
+
         var dataset = [],
             i = 0;
             
@@ -48,7 +48,7 @@
             .attr("cy", 50)
             .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
             .on("mouseout", function(){d3.select(this).style("fill", "white");})
-            .on("mousedown", increaseRadius);
+            .on("mousedown", upVote);
 
         function increaseRadius(){
             d3.select(this)
@@ -58,7 +58,26 @@
                 .attr("r", function(){return parseInt(d3.select(this).attr("r"))*1.5;});
         };
         //.attr("r", function(d) { return r(d.properties.population); });
+       
+        function increaseHeight(){
+            d3.select(this)
+              .transition()
+                .delay(0)
+                .duration(1000)
+                .attr("cy", function(){return parseInt(d3.select(this).attr("cy"))*1.5;} );
+
+        };       
+
+        function upVote(){
+            d3.select(this)
+              .transition()
+                .delay(0)
+                .duration(1000)
+                .attr("cy", function(){return parseInt(d3.select(this).attr("cy"))*1.5;} )
+                .attr("r", function(){return parseInt(d3.select(this).attr("r"))*1.5;});
                 
+        };            
+
     </script>
 </body>
 </html>

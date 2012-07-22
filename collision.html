@@ -13,29 +13,24 @@ circle {
     </style>
   </head>
   <body>
-    <div id="body">
-      <div id="footer">
-        Collision Detection
-        <div class="hint">move the mouse to repel nodes</div>
-      </div>
-    </div>
+    <div id="body"></div>
     <script type="text/javascript">
 
 var w = 1280,
     h = 800;
-
-var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; }),
-    color = d3.scale.category10();
+  
+var nodes = d3.range(2000).map(function() { return {radius: Math.random() * 12 + 4}; });
+    //, color = d3.scale.category10();
 
 var force = d3.layout.force()
     .gravity(0.05)
-    .charge(function(d, i) { return i ? 0 : -2000; })
+   // .charge(function(d, i) { return i ? 0 : -2000; })
     .nodes(nodes)
     .size([w, h]);
 
-var root = nodes[0];
-root.radius = 0;
-root.fixed = true;
+//var root = nodes[0];
+//root.radius = 0;
+//root.fixed = true;
 
 force.start();
 
@@ -44,11 +39,25 @@ var svg = d3.select("#body").append("svg:svg")
     .attr("height", h);
 
 svg.selectAll("circle")
-    .data(nodes.slice(1))
-  .enter().append("svg:circle")
-    .attr("r", function(d) { return d.radius - 2; })
-    .style("fill", function(d, i) { return color(i % 3); });
+    //.data(nodes.slice(1))
+    .data(nodes)
+    .enter()
+    .append("svg:circle")
+      .attr("r", function(d) { return d.radius - 2; })
+    //.style("fill", function(d, i) { return color(i); });
+      .style("fill", function(d,i){
+          if(i > 50){
+            return "blue"
+          }
+          else{
+            return "red"
+          }
+      })
+       //.on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+            //.on("mouseout", function(){d3.select(this).style("fill", "white");})
+      .on("mousedown", upVote);
 
+//spreads it all out
 force.on("tick", function(e) {
   var q = d3.geom.quadtree(nodes),
       i = 0,
@@ -63,12 +72,24 @@ force.on("tick", function(e) {
       .attr("cy", function(d) { return d.y; });
 });
 
-svg.on("mousemove", function() {
-  var p1 = d3.svg.mouse(this);
-  root.px = p1[0];
-  root.py = p1[1];
-  force.resume();
-});
+
+
+function upVote(){
+    d3.select(this)
+      .transition()
+        .delay(0)
+        .duration(1000)
+        .attr("cy", function(){return parseInt(d3.select(this).attr("cy"))*1.5;} )
+       .attr("r", function(){return parseInt(d3.select(this).attr("r"))*1.5;});
+        
+};         
+
+//svg.on("mousemove", function() {
+  //var p1 = d3.svg.mouse(this);
+ // root.px = p1[0];
+ // root.py = p1[1];
+//force.resume();
+//});
 
 function collide(node) {
   var r = node.radius + 16,
