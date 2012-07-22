@@ -41,9 +41,16 @@ window.fbAsyncInit = function() {
       $('.logo').animate({
         margin: '0px'
       }, 1000);
+      $('.login').delay(80).animate({
+        width: '85px',
+        height: '30px',
+        margin: '180px 0 0 45px'
+      });
       $('.songList').delay(1000).animate({
-        opacity: '100',
-      }, 1000);       
+        opacity: '100'
+      }, 1000);    
+      
+   
       $.post('https://'+window.location.hostname+'/api/login', data, function(){
         document.getElementById('auth-loggedout').style.display = 'none';
         document.getElementById('auth-loggedin').style.display = 'block';
