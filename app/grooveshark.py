@@ -1,4 +1,5 @@
-import re, requests, json, datetime, hashlib, random, math, urllib
+import re, requests, json, datetime, hashlib, random, math, urllib, time
+from threading import Timer
 
 API_BASE = 'html5.grooveshark.com'
 UUID = 'FFC143A0-88CD-47F3-B22D-EDBF0F427EF3'
@@ -210,7 +211,7 @@ class Client(object):
 	def get_song_url(self, song):
 		return self.get_song_url_by_id(song.id)
 
-	# Set song to downloaded on grooveshark servers
+	# Set song to downloaded on grooveshark servers by id
 	def set_song_download_by_id(self, id):
 		stream = self.get_stream_auth_by_songid(id)
 		return self.request('markSongDownloadedEx', {'streamKey': stream['streamKey'], 'streamServerID': stream['streamServerID'], 'songID': id})
@@ -218,13 +219,42 @@ class Client(object):
 	def set_song_download(self, song):
 		return self.set_song_download_by_id(song.id)
 
+	# Set the song to over 30 seconds on grooveshark servers by id
+	def set_song_started_by_id(self, id):
+		stream = self.get_stream_auth_by_songid(id)
+		return self.request('markStreamKeyOver30Seconds', {'streamKey': stream['streamKey'], 'streamServerID': stream['streamServerID'], 'songID': id})
+
+	def set_song_started(self, song):
+		return self.set_song_download_by_id(song.id)
+
+	# Set the song to played on grooveshark servers by id
+	def set_song_played_by_id(self, id):
+		stream = self.get_stream_auth_by_songid(id)
+		return self.request('markSongQueueSongPlayed', {'streamKey': stream['streamKey'], 'streamServerID': stream['streamServerID'], 'songID': id, 'songQueueID': 0, 'songQueueSongID': 0})
+
+	def set_song_played(self, song):
+		return self.set_song_download_by_id(song.id)
+
+	# Set the song to complete on grooveshark servers by id
+	def set_song_complete_by_id(self, id):
+		stream = self.get_stream_auth_by_songid(id)
+		return self.request('markSongComplete', {'streamKey': stream['streamKey'], 'streamServerID': stream['streamServerID'], 'songID': id})
+
+	def set_song_complete(self, song):
+		return self.set_song_download_by_id(song.id)
+
+	def set_song_events(self, song):
+		Timer(30, self.set_song_started, [song]).start()
+		if(int(round(float(song.duration))) != 0):
+			Timer(int(round(float(song.duration))), self.set_song_complete, [song]).start()
+
 	def testGet(self, title):
 		song = self.search_songs(title)[0]
 		resp = self.get_stream_auth_by_songid(song.id)
 		url = 'http://' + resp['ip'] + '/stream.php?streamKey=' + resp['streamKey']
-		useragent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
-		cookies =  dict(cookies_are = "PHPSESSID=" + str(self.session))
 		self.set_song_download(song)
+		self.set_song_played(song)
+		self.set_song_events(song)
 		return url
 
 	def testRandGet(self, artist):
@@ -424,7 +454,7 @@ class Playlist(object):
 		self.client.request('deletePlaylist', {'playlistID': id, 'name': name})
 
 # Test method
-def getSongUrl(title):
+def getSongUrls(title):
 	client = Client()
 	songs = []
 	if isinstance(title, dict):
@@ -447,6 +477,3 @@ def getSong(title):
 	client = Client()
 	response = client.testGet(title)
 	return {'url': response, 'sesion': client.session}
-
-print getSong("call me maybe")
-print getSong("the final countdown")
