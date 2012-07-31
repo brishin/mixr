@@ -1,10 +1,7 @@
-import os, random, math
+import os, random, math, redis, facebook, grooveshark
 from flask import Flask, abort, request, make_response, current_app, json, Response
 from datetime import timedelta
 from functools import update_wrapper
-import redis
-import facebook
-import grooveshark
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
@@ -75,6 +72,18 @@ def login():
     # pic = graph.get_object('me/picture', type='square')
     # r.hset(userID, 'pic', pic.get('url', None))
     r.rpush('processUser', userID)
+    return 'success'
+  abort(400)
+
+@app.route('/api/addEvent', methods=['POST'])
+def addEvent():
+  app.logger.debug(str(request.form))
+  if 'eventID' in request.form and 'userID' in request.form:
+    userID = request.form['userID']
+    eventID = request.form['eventID']
+    r.lpush('events', eventID)
+    r.hset(eventID, 'userID', userID)
+    r.rpush('processEvent', eventID)
     return 'success'
   abort(400)
 

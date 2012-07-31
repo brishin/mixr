@@ -1,8 +1,4 @@
-import redis
-import facebook
-import json
-import requests
-import re
+import redis, facebook, json, requests, re
 
 r = redis.StrictRedis(host='taleyarn.com', port=6379, db=0)
 SPOTIFY_API = 'http://ws.spotify.com/lookup/1/.json'
