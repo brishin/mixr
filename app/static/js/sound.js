@@ -18,7 +18,7 @@ var nowPlaying = "";
 // Add sound based on bubble JSON
 var playSong = function(song) {
   "use strict";
-  $.post("https://jubble.herokuapp.com/api/play", {
+  $.post("https://mixr.herokuapp.com/api/play", {
     'title': song.title
   }, function(data) {
     nowPlaying = soundManager.createSound({
@@ -31,7 +31,7 @@ var playSong = function(song) {
 
 var getSongs = function(num) {
   "use strict";
-  $.post("https://jubble.herokuapp.com/api/random", {
+  $.post("https://mixr.herokuapp.com/api/random", {
     'rows': num
   }, function(data) {return data;}, 'json');
 };

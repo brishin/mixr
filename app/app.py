@@ -36,7 +36,7 @@ def song():
   js = json.dumps(data)
 
   resp = Response(js, status=200, mimetype='application/json')
-  resp.headers['Link'] = 'http://jubble.herokuapp.com'
+  resp.headers['Link'] = 'http://mixr.herokuapp.com'
 
   return resp
 
@@ -54,7 +54,7 @@ def play():
   js = json.dumps(info)
 
   resp = Response(js, status=200, mimetype='application/json')
-  resp.headers['Link'] = 'http://jubble.herokuapp.com'
+  resp.headers['Link'] = 'http://mixr.herokuapp.com'
 
   return resp
 
@@ -107,14 +107,13 @@ def randomSong():
   js = json.dumps(resp)
 
   out = Response(js, status=200, mimetype='application/json')
-  out.headers['Link'] = 'http://jubble.herokuapp.com'
+  out.headers['Link'] = 'http://mixr.herokuapp.com'
 
   return out
   
 @app.route('/static/<path:file_path>')
 def static_fetch(file_path):
   return app.send_static_file(str(file_path))
-
 
 def get_artists():
   artists = []
